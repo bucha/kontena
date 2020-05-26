@@ -206,10 +206,10 @@ module Kontena::NetworkAdapters
       trusted_subnets = node.grid['trusted_subnets']
       until weave && weave.running? do
         exec_params = [
-          '--local', 'launch-router', '--ipalloc-range', '', '--dns-domain', 'kontena.local',
+          '--local', 'launch', '--ipalloc-range', '', '--dns-domain', 'kontena.local',
           '--password', ENV['KONTENA_TOKEN'], '--conn-limit', '0'
         ]
-        exec_params += ['--trusted-subnets', trusted_subnets.join(',')] if trusted_subnets
+        exec_params += ['--trusted-subnets', trusted_subnets.join(',')] if trusted_subnets.length > 0
         @executor_pool.execute(exec_params)
         weave = Docker::Container.get('weave') rescue nil
         wait_until("weave started", timeout: 10, interval: 1) {
@@ -244,7 +244,7 @@ module Kontena::NetworkAdapters
 
     def attach_router
       info "attaching router"
-      @executor_pool.execute(['--local', 'attach-router'])
+      @executor_pool.execute(['--local', 'attach'])
     end
 
     # @param [Array<String>] peer_ips

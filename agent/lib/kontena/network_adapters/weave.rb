@@ -119,7 +119,7 @@ module Kontena::NetworkAdapters
       elsif image_config['Cmd'] && image_config['Cmd'].size > 0
         cmd = cmd + image_config['Cmd']
       end
-      opts['Entrypoint'] = ['/w/w']
+      #opts['Entrypoint'] = ['/w/w']
       opts['Cmd'] = cmd
 
       modify_host_config(opts)

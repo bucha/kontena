@@ -95,32 +95,32 @@ module Kontena::NetworkAdapters
 
     # @param [Hash] opts
     def modify_create_opts(opts)
-      ensure_weave_wait
-
-      image = Docker::Image.get(opts['Image'])
-      image_config = image.info['Config']
-      cmd = []
-      if opts['Entrypoint']
-        if opts['Entrypoint'].is_a?(Array)
-          cmd = cmd + opts['Entrypoint']
-        else
-          cmd = cmd + [opts['Entrypoint']]
-        end
-      end
-      if !opts['Entrypoint'] && image_config['Entrypoint'] && image_config['Entrypoint'].size > 0
-        cmd = cmd + image_config['Entrypoint']
-      end
-      if opts['Cmd'] && opts['Cmd'].size > 0
-        if opts['Cmd'].is_a?(Array)
-          cmd = cmd + opts['Cmd']
-        else
-          cmd = cmd + [opts['Cmd']]
-        end
-      elsif image_config['Cmd'] && image_config['Cmd'].size > 0
-        cmd = cmd + image_config['Cmd']
-      end
+      #ensure_weave_wait
+      #
+      #image = Docker::Image.get(opts['Image'])
+      #image_config = image.info['Config']
+      #cmd = []
+      #if opts['Entrypoint']
+      #  if opts['Entrypoint'].is_a?(Array)
+      #    cmd = cmd + opts['Entrypoint']
+      #  else
+      #    cmd = cmd + [opts['Entrypoint']]
+      #  end
+      #end
+      #if !opts['Entrypoint'] && image_config['Entrypoint'] && image_config['Entrypoint'].size > 0
+      #  cmd = cmd + image_config['Entrypoint']
+      #end
+      #if opts['Cmd'] && opts['Cmd'].size > 0
+      #  if opts['Cmd'].is_a?(Array)
+      #    cmd = cmd + opts['Cmd']
+      #  else
+      #    cmd = cmd + [opts['Cmd']]
+      #  end
+      #elsif image_config['Cmd'] && image_config['Cmd'].size > 0
+      #  cmd = cmd + image_config['Cmd']
+      #end
       #opts['Entrypoint'] = ['/w/w']
-      opts['Cmd'] = cmd
+      #opts['Cmd'] = cmd
 
       modify_host_config(opts)
 

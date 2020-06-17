@@ -95,7 +95,7 @@ module Kontena::NetworkAdapters
 
     # @param [Hash] opts
     def modify_create_opts(opts)
-      #ensure_weave_wait
+      ensure_weave_wait
       #
       #image = Docker::Image.get(opts['Image'])
       #image_config = image.info['Config']
